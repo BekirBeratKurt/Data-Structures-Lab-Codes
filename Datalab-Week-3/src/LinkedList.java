@@ -51,25 +51,21 @@ public class LinkedList <T extends Comparable> {
     }
 
     public void addByeOrder(T val){
-        Node<T> newNode = new Node<>(val);
-
-        if(head == null){
-            head = newNode;
+        Node<T> newNode=new Node<>(val);
+        if (head==null){
+            head=newNode;
+        }else if(head.value.compareTo(val)==1){
+            newNode.next=head;
+            head=newNode;
         }else{
-            Node<T> iterrator = head;
-            Node<T> previousNode;
-            while (iterrator != null){
-                if (newNode.value.compareTo(iterrator.value) == -1){
-                    newNode.next = iterrator;
-
-                    // buraya bir şey gelcek
-
-                    previousNode = iterrator;
-                    iterrator = iterrator.next;
-                } else {
-                    iterrator = iterrator.next;
-                }
+            Node<T> prev, iterator;
+            prev=iterator=head;
+            while(iterator!=null && iterator.value.compareTo(val)!=1 ){
+                prev=iterator;
+                iterator=iterator.next;
             }
+            prev.next=newNode;
+            newNode.next=iterator;
         }
 
     }
